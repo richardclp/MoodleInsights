@@ -1,5 +1,6 @@
 import streamlit as st
 import altair as alt
+import pandas as pd
 
 def show(data):
     st.header("Patrones de Actividad")
