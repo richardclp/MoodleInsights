@@ -9,18 +9,27 @@ st.set_page_config(page_title="Educational Dashboard", layout="wide")
 
 # Título y descripción
 st.title("Educational Dashboard")
-st.sidebar.title("Navegación")
 
-# Menú de navegación
-page = st.sidebar.selectbox("Seleccione una sección:", ["Resumen General", "Participación por Curso", "Patrones de Actividad"])
+# Opciones de navegación
+pages = ["Resumen General", "Participación por Curso", "Patrones de Actividad"]
+
+# Menú desplegable en el cuerpo principal
+selected_page = st.selectbox("Seleccione una sección:", pages)
+
+# Menú lateral que refleja el valor del combo seleccionado
+sidebar_page = st.sidebar.radio("Navegación", pages, index=pages.index(selected_page))
+
+# Sincronizar la página seleccionada en el menú principal con el menú lateral
+if selected_page != sidebar_page:
+    selected_page = sidebar_page
 
 # Condicionales para cargar cada sección
-if page == "Resumen General":
+if selected_page == "Resumen General":
     from pages import overview
     overview.show(data)
-elif page == "Participación por Curso":
+elif selected_page == "Participación por Curso":
     from pages import course_participation
     course_participation.show(data)
-elif page == "Patrones de Actividad":
+elif selected_page == "Patrones de Actividad":
     from pages import activity_patterns
     activity_patterns.show(data)
