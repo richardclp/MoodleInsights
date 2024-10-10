@@ -113,12 +113,12 @@ top_10_duracion = top_duracion.head(10)
 # Crear gráfico de barras para el top 10
 st.bar_chart(top_10_duracion)
 
-plt.figure(figsize=(10, 6))
-top_10_duracion.plot(kind="bar", color="skyblue")
-plt.title("Top 10 Estudiantes con Mayor Duración de Conexión")
-plt.xlabel("ID Estudiante")
-plt.ylabel("Duración de Conexión (min)")
-st.pyplot(plt)
+# plt.figure(figsize=(10, 6))
+# top_10_duracion.plot(kind="bar", color="skyblue")
+# lt.title("Top 10 Estudiantes con Mayor Duración de Conexión")
+# plt.xlabel("ID Estudiante")
+# plt.ylabel("Duración de Conexión (min)")
+# st.pyplot(plt)
 
 
 # Pregunta 4: Comparación de Cursos (Matemáticas vs Biología)
