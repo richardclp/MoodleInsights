@@ -39,4 +39,10 @@ data = {
 student_data_df = pd.DataFrame(data)
 
 # Mostrar las primeras filas
-student_data_df.head(), student_data_df.shape
+print(student_data_df.head())
+
+# Guardar el DataFrame en un archivo CSV
+student_data_df.to_csv("./data/datos_estudiantes.csv", index=False, encoding="utf-8")
+
+# Mostrar la forma del DataFrame
+print(student_data_df.shape)
