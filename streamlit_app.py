@@ -1,38 +1,64 @@
 import streamlit as st
-from utils.data_loader import load_data
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Cargar datos
-data = load_data("data/student_data.csv")
+data = pd.read_csv("data/dataset.csv")
 
-# Configuración del título del dashboard
-st.set_page_config(page_title="Educational Dashboard", layout="wide")
+# Titulo del dashboard
+st.title("Dashboard de Participación Estudiantil")
 
-# Título y descripción
-st.title("Educational Dashboard")
+# Mostrar el dataset
+st.subheader("Dataset de Participación")
+st.dataframe(data)
 
-# Opciones de navegación
-pages = ["Resumen General", "Participación por Curso", "Patrones de Actividad"]
+# Pregunta 1: ¿Cuál es el curso con menor participación?
+st.subheader("1. Curso con menor participación")
+participacion = (
+    data.groupby("Curso")["Participación"].value_counts().unstack().fillna(0)
+)
+curso_menor_participacion = participacion["No"].idxmax()
 
-# Menú desplegable en el cuerpo principal
-selected_page = st.selectbox("Seleccione una sección:", pages)
+st.write(f"**Curso con menor participación:** {curso_menor_participacion}")
 
-# Menú lateral que refleja el valor del combo seleccionado
-sidebar_page = st.sidebar.radio("Navegación", pages, index=pages.index(selected_page))
+# Gráfico de participación por curso
+plt.figure(figsize=(10, 5))
+sns.countplot(data=data, x="Curso", hue="Participación", palette="Set2")
+plt.title("Participación por Curso")
+plt.xlabel("Curso")
+plt.ylabel("Número de Estudiantes")
+st.pyplot(plt)
 
-# Sincronizar la página seleccionada en el menú principal con el menú lateral
-if selected_page != sidebar_page:
-    selected_page = sidebar_page
+# Pregunta 2: ¿En qué horario están más activos los estudiantes?
+st.subheader("2. Horario de mayor actividad")
+data["Hora de Conexión"] = pd.to_datetime(
+    data["Hora de Conexión"], format="%H:%M"
+).dt.hour
+hora_actividad = data["Hora de Conexión"].value_counts().sort_index()
 
-# Condicionales para cargar cada sección
-if selected_page == "Resumen General":
-    from pages import overview
+st.bar_chart(hora_actividad)
 
-    overview.show(data)
-elif selected_page == "Participación por Curso":
-    from pages import course_participation
+# Pregunta 3: Estudiantes más activos
+st.subheader("3. Estudiantes más activos")
+top_duracion = (
+    data.groupby("ID Estudiante")["Duración de Conexión (min)"]
+    .sum()
+    .sort_values(ascending=False)
+)
 
-    course_participation.show(data)
-elif selected_page == "Patrones de Actividad":
-    from pages import activity_patterns
+st.write("**Estudiantes con mayor duración de conexión:**")
+st.write(top_duracion)
 
-    activity_patterns.show(data)
+# Pregunta 4: Comparación de cursos
+st.subheader("4. Comparación de Cursos (Matemáticas vs Biología)")
+comparacion = data[data["Curso"].isin(["Matemáticas", "Biología"])]
+sns.boxplot(x="Curso", y="Duración de Conexión (min)", data=comparacion)
+plt.title("Comparación de Duración de Conexión")
+st.pyplot(plt)
+
+# Reflexión Final
+# st.subheader("Reflexión Final")
+# st.write(
+#    "¿Qué acciones podrían tomar los docentes para aumentar la participación en los cursos con menor actividad?"
+# )
