@@ -3,10 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Cargar datos
+# Cargar datos desde el archivo CSV
 data = pd.read_csv("data/student_data.csv")
 
-# Titulo del dashboard
+# Título del dashboard
 st.title("Dashboard de Participación Estudiantil")
 
 # Mostrar el dataset
@@ -15,7 +15,6 @@ st.dataframe(data)
 
 # Pregunta 1: ¿Cuál es el curso con menor participación?
 st.subheader("1. Curso con menor participación")
-# Actualizar el nombre de la columna para que coincida
 participacion = (
     data.groupby("Curso")["Participación (Sí/No)"].value_counts().unstack().fillna(0)
 )
@@ -30,6 +29,7 @@ plt.title("Participación por Curso")
 plt.xlabel("Curso")
 plt.ylabel("Número de Estudiantes")
 st.pyplot(plt)
+plt.close()  # Cerrar el gráfico para evitar superposición
 
 # Pregunta 2: ¿En qué horario están más activos los estudiantes?
 st.subheader("2. Horario de mayor actividad")
@@ -54,9 +54,11 @@ st.write(top_duracion)
 # Pregunta 4: Comparación de cursos
 st.subheader("4. Comparación de Cursos (Matemáticas vs Biología)")
 comparacion = data[data["Curso"].isin(["Matemáticas", "Biología"])]
+plt.figure(figsize=(10, 5))
 sns.boxplot(x="Curso", y="Duración de Conexión (min)", data=comparacion)
 plt.title("Comparación de Duración de Conexión")
 st.pyplot(plt)
+plt.close()  # Cerrar el gráfico para evitar superposición
 
 # Reflexión Final
 # st.subheader("Reflexión Final")
