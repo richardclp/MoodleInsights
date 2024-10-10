@@ -38,6 +38,14 @@ data["Hora de Conexión"] = pd.to_datetime(
 ).dt.hour
 hora_actividad = data["Hora de Conexión"].value_counts().sort_index()
 
+# Calcular la hora o horas con más actividad
+max_actividad = hora_actividad.max()
+horas_mas_activas = hora_actividad[hora_actividad == max_actividad].index.tolist()
+
+st.write(
+    f"**Hora(s) con mayor actividad:** {', '.join(map(str, horas_mas_activas))} horas"
+)
+
 st.bar_chart(hora_actividad)
 # Graficar la hora de actividad
 # plt.figure(figsize=(10, 5))
