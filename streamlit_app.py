@@ -26,10 +26,13 @@ if selected_page != sidebar_page:
 # Condicionales para cargar cada sección
 if selected_page == "Resumen General":
     from pages import overview
+
     overview.show(data)
 elif selected_page == "Participación por Curso":
     from pages import course_participation
+
     course_participation.show(data)
 elif selected_page == "Patrones de Actividad":
     from pages import activity_patterns
+
     activity_patterns.show(data)
