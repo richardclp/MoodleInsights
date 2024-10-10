@@ -38,13 +38,14 @@ data["Hora de Conexión"] = pd.to_datetime(
 ).dt.hour
 hora_actividad = data["Hora de Conexión"].value_counts().sort_index()
 
+st.bar_chart(hora_actividad)
 # Graficar la hora de actividad
-plt.figure(figsize=(10, 5))
-plt.bar(hora_actividad.index, hora_actividad.values, color="skyblue")
-plt.title("Horario de Mayor Actividad")
-plt.xlabel("Hora de Conexión")
-plt.ylabel("Número de Conexiones")
-plt.xticks(hora_actividad.index)  # Mostrar cada hora en el eje x
+# plt.figure(figsize=(10, 5))
+# plt.bar(hora_actividad.index, hora_actividad.values, color="skyblue")
+# plt.title("Horario de Mayor Actividad")
+# plt.xlabel("Hora de Conexión")
+# plt.ylabel("Número de Conexiones")
+# plt.xticks(hora_actividad.index)  # Mostrar cada hora en el eje x
 
 # Anotar los valores exactos en las barras
 for index, value in enumerate(hora_actividad.values):
