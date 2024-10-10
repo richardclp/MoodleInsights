@@ -48,11 +48,11 @@ st.bar_chart(hora_actividad)
 # plt.xticks(hora_actividad.index)  # Mostrar cada hora en el eje x
 
 # Anotar los valores exactos en las barras
-for index, value in enumerate(hora_actividad.values):
-    plt.text(hora_actividad.index[index], value + 0.2, str(value), ha="center")
+# for index, value in enumerate(hora_actividad.values):
+#    plt.text(hora_actividad.index[index], value + 0.2, str(value), ha="center")
 
-st.pyplot(plt)
-plt.close()  # Cerrar el gráfico para evitar superposición
+# st.pyplot(plt)
+# plt.close()  # Cerrar el gráfico para evitar superposición
 
 # Pregunta 3: Estudiantes más activos
 st.subheader("3. Estudiantes más activos")
