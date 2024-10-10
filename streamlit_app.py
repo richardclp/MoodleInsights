@@ -103,8 +103,26 @@ top_duracion = (
     .sort_values(ascending=False)
 )
 
+# Mostrar la lista de estudiantes con mayor duración de conexión
 st.write("**Estudiantes con mayor duración de conexión:**")
 st.write(top_duracion)
+
+# Filtrar el top 10 de estudiantes más activos
+top_10_duracion = top_duracion.head(10)
+
+# Crear gráfico de barras para el top 10
+st.bar_chart(top_10_duracion)
+
+# Alternativamente, puedes usar matplotlib para una mayor personalización:
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 6))
+top_10_duracion.plot(kind="bar", color="skyblue")
+plt.title("Top 10 Estudiantes con Mayor Duración de Conexión")
+plt.xlabel("ID Estudiante")
+plt.ylabel("Duración de Conexión (min)")
+st.pyplot(plt)
+
 
 # Pregunta 4: Comparación de Cursos (Matemáticas vs Biología)
 st.subheader("4. Comparación de Cursos (Matemáticas vs Biología)")
