@@ -87,12 +87,16 @@ biologia_stats = comparacion[comparacion["Curso"] == "Biología"][
     "Duración de Conexión (min)"
 ].describe()
 
-# Mostrar estadísticas
-st.write("**Estadísticas de Matemáticas**")
-st.write(matematicas_stats)
+# Crear dos columnas para mostrar las estadísticas una al lado de la otra
+col1, col2 = st.columns(2)
 
-st.write("**Estadísticas de Biología**")
-st.write(biologia_stats)
+with col1:
+    st.write("**Estadísticas de Matemáticas**")
+    st.write(matematicas_stats)
+
+with col2:
+    st.write("**Estadísticas de Biología**")
+    st.write(biologia_stats)
 
 # Gráfico de comparación
 plt.figure(figsize=(10, 5))
