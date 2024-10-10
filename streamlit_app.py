@@ -14,12 +14,14 @@ st.subheader("Dataset de Participación")
 st.dataframe(data)
 
 # Pregunta 1: ¿Cuál es el curso con menor participación?
-st.subheader("1. Curso con menor participación")
+st.subheader("1. Participación por Curso")
 participacion = (
     data.groupby("Curso")["Participación (Sí/No)"].value_counts().unstack().fillna(0)
 )
 curso_menor_participacion = participacion["No"].idxmax()
+curso_mayor_participacion = participacion["No"].idxmin()
 
+st.write(f"**Curso con mayor participación:** {curso_mayor_participacion}")
 st.write(f"**Curso con menor participación:** {curso_menor_participacion}")
 
 # Gráfico de participación por curso
@@ -73,9 +75,26 @@ top_duracion = (
 st.write("**Estudiantes con mayor duración de conexión:**")
 st.write(top_duracion)
 
-# Pregunta 4: Comparación de cursos
+# Pregunta 4: Comparación de Cursos (Matemáticas vs Biología)
 st.subheader("4. Comparación de Cursos (Matemáticas vs Biología)")
 comparacion = data[data["Curso"].isin(["Matemáticas", "Biología"])]
+
+# Calcular estadísticas para Matemáticas y Biología
+matematicas_stats = comparacion[comparacion["Curso"] == "Matemáticas"][
+    "Duración de Conexión (min)"
+].describe()
+biologia_stats = comparacion[comparacion["Curso"] == "Biología"][
+    "Duración de Conexión (min)"
+].describe()
+
+# Mostrar estadísticas
+st.write("**Estadísticas de Matemáticas**")
+st.write(matematicas_stats)
+
+st.write("**Estadísticas de Biología**")
+st.write(biologia_stats)
+
+# Gráfico de comparación
 plt.figure(figsize=(10, 5))
 sns.boxplot(x="Curso", y="Duración de Conexión (min)", data=comparacion)
 plt.title("Comparación de Duración de Conexión")
