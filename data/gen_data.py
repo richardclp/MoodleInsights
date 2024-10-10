@@ -4,8 +4,8 @@ import numpy as np
 from datetime import datetime, timedelta
 
 # Configuración de semilla para reproducibilidad
-random.seed(0)
-np.random.seed(0)
+# random.seed(0)
+# np.random.seed(0)
 
 # Definir el número de estudiantes y las materias
 num_students = 78
