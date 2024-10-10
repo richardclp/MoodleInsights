@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Cargar datos
-data = pd.read_csv("data/student_data.csv")
+data = pd.read_csv("data/dataset.csv")
 
 # Titulo del dashboard
 st.title("Dashboard de Participación Estudiantil")
@@ -15,8 +15,9 @@ st.dataframe(data)
 
 # Pregunta 1: ¿Cuál es el curso con menor participación?
 st.subheader("1. Curso con menor participación")
+# Actualizar el nombre de la columna para que coincida
 participacion = (
-    data.groupby("Curso")["Participación"].value_counts().unstack().fillna(0)
+    data.groupby("Curso")["Participación (Sí/No)"].value_counts().unstack().fillna(0)
 )
 curso_menor_participacion = participacion["No"].idxmax()
 
@@ -24,7 +25,7 @@ st.write(f"**Curso con menor participación:** {curso_menor_participacion}")
 
 # Gráfico de participación por curso
 plt.figure(figsize=(10, 5))
-sns.countplot(data=data, x="Curso", hue="Participación", palette="Set2")
+sns.countplot(data=data, x="Curso", hue="Participación (Sí/No)", palette="Set2")
 plt.title("Participación por Curso")
 plt.xlabel("Curso")
 plt.ylabel("Número de Estudiantes")
