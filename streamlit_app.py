@@ -113,9 +113,6 @@ top_10_duracion = top_duracion.head(10)
 # Crear gráfico de barras para el top 10
 st.bar_chart(top_10_duracion)
 
-# Alternativamente, puedes usar matplotlib para una mayor personalización:
-import matplotlib.pyplot as plt
-
 plt.figure(figsize=(10, 6))
 top_10_duracion.plot(kind="bar", color="skyblue")
 plt.title("Top 10 Estudiantes con Mayor Duración de Conexión")
