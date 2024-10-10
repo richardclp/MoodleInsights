@@ -34,7 +34,7 @@ for student_id in range(1, num_students + 1):
             )[0],
             "Duración de Conexión (min)": np.random.randint(5, 120),
             "Hora de Conexión": f"{random.randint(6, 23)}:{str(random.randint(0, 59)).zfill(2)}",
-            # columna de Fecha aleatoria con 30 dias hacia atras
+            # columna de Fecha aleatoria con 30 días hacia atrás
             "Fecha": (datetime.now() - timedelta(days=random.randint(0, 30))).date(),
             # columna de Tareas Completadas
             "Tareas Completadas": np.random.randint(0, 4),  # Entre 0 y 3
@@ -49,6 +49,9 @@ print(student_data_df.head())
 
 # Guardar el DataFrame en un archivo CSV
 student_data_df.to_csv("./data/student_data.csv", index=False, encoding="utf-8")
+
+# Guardar el DataFrame en un archivo Excel
+student_data_df.to_excel("./data/student_data.xlsx", index=False, engine="openpyxl")
 
 # Mostrar la forma del DataFrame
 print(student_data_df.shape)
