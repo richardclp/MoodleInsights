@@ -18,11 +18,29 @@ st.subheader("1. Participación por Curso")
 participacion = (
     data.groupby("Curso")["Participación (Sí/No)"].value_counts().unstack().fillna(0)
 )
+
 curso_menor_participacion = participacion["No"].idxmax()
 curso_mayor_participacion = participacion["No"].idxmin()
+menor_participacion_valor = participacion.loc[curso_menor_participacion, "No"]
+mayor_participacion_valor = participacion.loc[curso_mayor_participacion, "Sí"]
 
-st.write(f"**Curso con mayor participación:** {curso_mayor_participacion}")
-st.write(f"**Curso con menor participación:** {curso_menor_participacion}")
+# Crear columnas para mostrar métricas
+col1, col2 = st.columns(2)
+
+with col1:
+    st.metric(
+        label="Curso con Mayor Participación",
+        value=curso_mayor_participacion,
+        delta=int(mayor_participacion_valor),
+    )
+
+with col2:
+    st.metric(
+        label="Curso con Menor Participación",
+        value=curso_menor_participacion,
+        delta=int(menor_participacion_valor),
+    )
+
 
 # Gráfico de participación por curso
 plt.figure(figsize=(10, 5))
