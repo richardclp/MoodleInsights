@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Cargar datos
-data = pd.read_csv("data/dstudent_data.csv")
+data = pd.read_csv("data/student_data.csv")
 
 # Titulo del dashboard
 st.title("Dashboard de Participación Estudiantil")
