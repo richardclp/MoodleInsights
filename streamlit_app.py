@@ -39,6 +39,7 @@ with col2:
         label="Curso con Menor Participación",
         value=curso_menor_participacion,
         delta=int(menor_participacion_valor),
+        delta_color="inverse",
     )
 
 
