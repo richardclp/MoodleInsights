@@ -149,6 +149,7 @@ chart = (
 
 # Mostrar el gráfico en Streamlit
 st.altair_chart(chart, use_container_width=True)
+st.dataframe(participacionEst)
 # ----------------------------------------------------------------
 
 # Pregunta 2: ¿En qué horario están más activos los estudiantes?
