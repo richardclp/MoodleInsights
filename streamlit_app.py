@@ -140,12 +140,10 @@ chart = (
         color=alt.Color(
             "Participación:N", scale=alt.Scale(scheme="set2"), title="Participación"
         ),
-        column=alt.Column(
-            "Participación:N", title=None
-        ),  # Elimina el título de cada columna para una visualización más limpia
+        column=None,  # Elimina la división en columnas para un gráfico agrupado
     )
     .properties(
-        width=alt.Step(50),  # Ancho de cada barra
+        width=500,  # Ajusta el ancho del gráfico según lo necesites
         title="Participación por Curso (Sí/No)",
     )
 )
