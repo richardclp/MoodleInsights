@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import altair as alt
 
 # Cargar datos desde el archivo CSV
 data = pd.read_csv("data/student_data.csv")
@@ -125,18 +126,25 @@ with col2:
 participacionEst = (
     data.groupby(["Curso", "Participación (Sí/No)"])["ID Estudiante"]
     .count()
-    .unstack()
-    .fillna(0)
+    .reset_index()
 )
-# Renombrar columnas para agrupar
-participacionEst.columns = ["No Participación", "Sí Participación"]
+participacionEst.columns = ["Curso", "Participación", "Cantidad"]
 
-# Preparar datos para st.bar_chart
-# Vamos a transponer el DataFrame para que cada columna sea una serie separada
-participacion_df = participacionEst.T
+# Crear el gráfico de barras agrupadas
+chart = (
+    alt.Chart(participacionEst)
+    .mark_bar()
+    .encode(
+        x=alt.X("Curso:N", title="Curso"),
+        y=alt.Y("Cantidad:Q", title="Número de Estudiantes"),
+        color=alt.Color("Participación:N", legend=alt.Legend(title="Participación")),
+        column=alt.Column("Participación:N", title="Participación (Sí/No)"),
+    )
+    .properties(title="Participación por Curso", width=150)
+)
 
-# Mostrar el gráfico
-st.bar_chart(participacion_df)
+# Mostrar el gráfico en Streamlit
+st.altair_chart(chart, use_container_width=True)
 # ----------------------------------------------------------------
 
 # Pregunta 2: ¿En qué horario están más activos los estudiantes?
