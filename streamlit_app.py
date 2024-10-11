@@ -130,17 +130,23 @@ participacionEst = (
 )
 participacionEst.columns = ["Curso", "Participación", "Cantidad"]
 
-# Crear el gráfico de barras agrupadas
+# Crear gráfico de barras agrupadas por curso
 chart = (
     alt.Chart(participacionEst)
     .mark_bar()
     .encode(
         x=alt.X("Curso:N", title="Curso"),
         y=alt.Y("Cantidad:Q", title="Número de Estudiantes"),
-        color=alt.Color("Participación:N", legend=alt.Legend(title="Participación")),
+        color=alt.Color(
+            "Participación:N", scale=alt.Scale(scheme="set2"), title="Participación"
+        ),
         column=alt.Column("Participación:N", title="Participación (Sí/No)"),
+        xOffset="Participación:N",
     )
-    .properties(title="Participación por Curso", width=150)
+    .properties(
+        width=alt.Step(50), title="Participación por Curso"  # Ancho de cada barra
+    )
+    .configure_axisX(labelAngle=-45)
 )
 
 # Mostrar el gráfico en Streamlit
