@@ -132,7 +132,7 @@ participacionEst.columns = ["Curso", "Participación", "Cantidad"]
 
 # Crear el gráfico de barras agrupadas
 chart = (
-    alt.Chart(participacion)
+    alt.Chart(participacionEst)
     .mark_bar()
     .encode(
         x=alt.X("Curso:N", title="Curso", axis=alt.Axis(labelAngle=-45)),
