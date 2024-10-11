@@ -111,14 +111,29 @@ with col2:
     )
 
 
+# ----------------------------------------------------------------
 # Gráfico de participación por curso
-plt.figure(figsize=(10, 5))
-sns.countplot(data=data, x="Curso", hue="Participación (Sí/No)", palette="Set2")
-plt.title("Participación por Curso")
-plt.xlabel("Curso")
-plt.ylabel("Número de Estudiantes")
-st.pyplot(plt)
-plt.close()  # Cerrar el gráfico para evitar superposición
+# plt.figure(figsize=(10, 5))
+# sns.countplot(data=data, x="Curso", hue="Participación (Sí/No)", palette="Set2")
+# plt.title("Participación por Curso")
+# plt.xlabel("Curso")
+# plt.ylabel("Número de Estudiantes")
+# st.pyplot(plt)
+# plt.close()  # Cerrar el gráfico para evitar superposición
+# ----------------------------------------------------------------
+# Calcular la cantidad de estudiantes por curso y participación
+participacionEst = (
+    data.groupby(["Curso", "Participación (Sí/No)"])["ID Estudiante"]
+    .count()
+    .unstack()
+    .fillna(0)
+)
+# Crear un gráfico de barras con Streamlit
+st.bar_chart(participacionEst)
+# Para una visualización más clara, podemos mostrar el DataFrame de participaciones
+st.write("**Participación por Curso**:")
+st.write(participacionEst)
+# ----------------------------------------------------------------
 
 # Pregunta 2: ¿En qué horario están más activos los estudiantes?
 st.subheader("2. Horario de mayor actividad")
