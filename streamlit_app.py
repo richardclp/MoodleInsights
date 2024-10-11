@@ -234,12 +234,12 @@ biologia_stats = comparacion[comparacion["Curso"] == "Biología"][
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write("**Estadísticas de Matemáticas**")
-    st.write(matematicas_stats)
-
-with col2:
     st.write("**Estadísticas de Biología**")
     st.write(biologia_stats)
+
+with col2:
+    st.write("**Estadísticas de Matemáticas**")
+    st.write(matematicas_stats)
 
 # ------------------------------------------------------------------
 # Gráfico de comparación
@@ -252,7 +252,7 @@ with col2:
 # Crear el boxplot con Altair
 boxplot = (
     alt.Chart(comparacion)
-    .mark_boxplot(extent="min-max")
+    .mark_boxplot(extent="min-max", size=100)
     .encode(
         x=alt.X("Curso:N", title="Curso"),
         y=alt.Y("Duración de Conexión (min):Q", title="Duración de Conexión (min)"),
