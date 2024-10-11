@@ -241,12 +241,28 @@ with col2:
     st.write("**Estadísticas de Biología**")
     st.write(biologia_stats)
 
+# ------------------------------------------------------------------
 # Gráfico de comparación
-plt.figure(figsize=(10, 5))
-sns.boxplot(x="Curso", y="Duración de Conexión (min)", data=comparacion)
-plt.title("Comparación de Duración de Conexión")
-st.pyplot(plt)
-plt.close()  # Cerrar el gráfico para evitar superposición
+# plt.figure(figsize=(10, 5))
+# sns.boxplot(x="Curso", y="Duración de Conexión (min)", data=comparacion)
+# plt.title("Comparación de Duración de Conexión")
+# st.pyplot(plt)
+# plt.close()  # Cerrar el gráfico para evitar superposición
+# ------------------------------------------------------------------
+# Crear el boxplot con Altair
+boxplot = (
+    alt.Chart(comparacion)
+    .mark_boxplot(extent="min-max")
+    .encode(
+        x=alt.X("Curso:N", title="Curso"),
+        y=alt.Y("Duración de Conexión (min):Q", title="Duración de Conexión (min)"),
+    )
+    .properties(title="Comparación de Duración de Conexión")
+)
+
+# Mostrar el gráfico en Streamlit
+st.altair_chart(boxplot, use_container_width=True, theme="streamlit")
+# ------------------------------------------------------------------
 
 # Reflexión Final
 # st.subheader("Reflexión Final")
