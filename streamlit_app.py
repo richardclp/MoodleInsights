@@ -140,7 +140,6 @@ chart = (
         color=alt.Color(
             "Participación:N", scale=alt.Scale(scheme="set2"), title="Participación"
         ),
-        column=None,  # Elimina la división en columnas para un gráfico agrupado
     )
     .properties(
         width=500,  # Ajusta el ancho del gráfico según lo necesites
