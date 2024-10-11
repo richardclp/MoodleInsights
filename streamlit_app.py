@@ -41,7 +41,7 @@ st.sidebar.markdown(
     color: #333;
     text-decoration: none;
     display: block;
-    padding: 12px;
+    margin: 0;
     border-radius: 8px;
     position: relative;
     transition: all 0.3s ease;
