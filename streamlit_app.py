@@ -8,6 +8,72 @@ data = pd.read_csv("data/student_data.csv")
 
 # Título del dashboard
 st.title("Dashboard de Participación Estudiantil")
+st.sidebar.markdown(
+    """
+<style>
+[data-testid="stSidebarNav"] {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-testid="stSidebarNavItems"] {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+[data-testid="stSidebarNavItems"] li {
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background-color: #e2e2e2;
+    transition: all 0.3s ease;
+}
+
+[data-testid="stSidebarNavItems"] li:hover {
+    background-color: #b3ecff;
+    transform: scale(1.05);
+}
+
+[data-testid="stSidebarNavLink"] {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 12px;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+[data-testid="stSidebarNavLink"]::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background-color: #007acc;
+    transition: width 0.3s ease;
+}
+
+[data-testid="stSidebarNavLink"]:hover::before {
+    width: 100%;
+}
+
+[data-testid="stSidebarNavLink"]:hover {
+    color: #007acc;
+}
+
+[data-testid="stSidebarNavLink"] span {
+    display: inline-block;
+    vertical-align: middle;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
 
 # Mostrar el dataset
 st.subheader("Dataset de Participación")
