@@ -140,11 +140,11 @@ chart = (
         color=alt.Color(
             "Participación:N", scale=alt.Scale(scheme="set2"), title="Participación"
         ),
+        column=alt.Column("Participación:N", title="Participación"),
     )
-    .properties(
-        width=500,  # Ajusta el ancho del gráfico según lo necesites
-        title="Participación por Curso (Sí/No)",
-    )
+    .properties(width=alt.Step(50))  # Ajusta el ancho del gráfico según lo necesites
+    .configure_axis(labelFontSize=12, titleFontSize=14)
+    .configure_legend(titleFontSize=14, labelFontSize=12)
 )
 
 # Mostrar el gráfico en Streamlit
