@@ -8,8 +8,8 @@ data = pd.read_csv("data/student_data.csv")
 
 # Título del dashboard
 st.title("Dashboard de Participación Estudiantil")
-st.sidebar.markdown(
-    """
+# CSS en un string
+css_style_menu = """
 <style>
 [data-testid="stSidebarNav"] {
     padding: 10px;
@@ -71,7 +71,9 @@ st.sidebar.markdown(
     vertical-align: middle;
 }
 </style>
-""",
+"""
+st.markdown(
+    css_style_menu,
     unsafe_allow_html=True,
 )
 
