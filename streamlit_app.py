@@ -140,16 +140,13 @@ chart = (
         color=alt.Color(
             "Participación:N", scale=alt.Scale(scheme="set2"), title="Participación"
         ),
-        column=alt.Column("Participación:N", title="Participación"),
+        xOffset="Participación:N",
     )
-    .properties(width=alt.Step(50))  # Ajusta el ancho del gráfico según lo necesites
-    .configure_axis(labelFontSize=12, titleFontSize=14)
-    .configure_legend(titleFontSize=14, labelFontSize=12)
+    .configure_legend(orient="right", titleFontSize=14, labelFontSize=12)
 )
 
 # Mostrar el gráfico en Streamlit
-st.altair_chart(chart, use_container_width=True)
-st.dataframe(participacionEst)
+st.altair_chart(chart, use_container_width=True, theme="streamlit")
 # ----------------------------------------------------------------
 
 # Pregunta 2: ¿En qué horario están más activos los estudiantes?
