@@ -128,11 +128,15 @@ participacionEst = (
     .unstack()
     .fillna(0)
 )
-# Crear un gráfico de barras con Streamlit
-st.bar_chart(participacionEst)
-# Para una visualización más clara, podemos mostrar el DataFrame de participaciones
-st.write("**Participación por Curso**:")
-st.write(participacionEst)
+# Renombrar columnas para agrupar
+participacionEst.columns = ["No Participación", "Sí Participación"]
+
+# Preparar datos para st.bar_chart
+# Vamos a transponer el DataFrame para que cada columna sea una serie separada
+participacion_df = participacionEst.T
+
+# Mostrar el gráfico
+st.bar_chart(participacion_df)
 # ----------------------------------------------------------------
 
 # Pregunta 2: ¿En qué horario están más activos los estudiantes?
