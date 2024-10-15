@@ -7,6 +7,7 @@ import altair as alt
 # Cargar datos desde el archivo CSV
 data = pd.read_csv("data/student_data.csv")
 
+st.set_page_config(page_title="Inicio", page_icon=":chart_with_upwards_trend:")
 # Título del dashboard
 st.title("Dashboard de Participación Estudiantil")
 # CSS en un string
