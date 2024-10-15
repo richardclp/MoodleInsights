@@ -79,7 +79,7 @@ st.markdown(
 )
 
 # Mostrar el dataset
-st.subheader("Dataset de Participación")
+st.subheader("Dataset de Moodle")
 st.dataframe(data)
 
 # Pregunta 1: ¿Cuál es el curso con menor participación?
